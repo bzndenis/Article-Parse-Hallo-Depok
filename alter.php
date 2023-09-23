@@ -124,11 +124,11 @@
         }
         ?>
 
-    <button id="copyButton" class="btn btn-primary" onclick="copyToClipboard()">
-        Salin Artikel Hanya Teks
-    </button>
+        <button id="copyButton" class="btn btn-primary" onclick="copyToClipboard()">
+            Salin Artikel Hanya Teks
+        </button>
 
-    <textarea id="textToCopy" style="display: none;"><?php echo strip_tags($article); ?></textarea>
+        <textarea id="textToCopy" style="display: none;"><?php echo strip_tags($article); ?></textarea>
     </div>
 
     <div id="footer" class="fixed-bottom">

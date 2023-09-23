@@ -41,11 +41,10 @@
             }
         }
     </style>
-    <script
-        src="https://cdn.tiny.cloud/1/vmzgpqebnq23hnpw7i0ubynejm8aur0uhmp7benl2c6k6ln6/tinymce/5/tinymce.min.js"></script>
+    <script src="https://denis.skripsijoss.my.id/parser/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
-            selector: '#article',
+            selector: 'textarea',
             height: 300,
             plugins: 'advlist autolink lists link image charmap print preview anchor',
             toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
@@ -85,7 +84,7 @@
 <body>
     <div class="container">
         <h1>Article Parser</h1>
-        <form method="post" action="">
+        <form method="post" action="" onsubmit="copyAsHyperlink();">
             <div class="form-group">
                 <label for="article">Masukan Artikel Disini :</label>
                 <textarea id="article" name="article" class="form-control"></textarea>
@@ -99,22 +98,38 @@
 
             // Hapus karakter '*' dalam artikel
             $article = str_replace('*', '', $article);
-            $article = str_replace('"', '', $article);
+            $article = str_replace('#', '', $article);
 
             // Tidy the paragraphs
             $article = preg_replace('/<p>\s*(.*?)\s*<\/p>/', '<p>$1</p>', $article, -1);
             $article = preg_replace('/\s{2,}/', ' ', $article);
 
             // Add "HALLO.DEPOK.ID" before the first paragraph
-            //$article = preg_replace('/<p>/', '<p><a href="https://depok.hallo.id/">HALLO.DEPOK.ID - </a> ', $article, 1);
-        
+            $article = preg_replace('/<p>/', '<p><strong>HALLO.DEPOK.ID - </strong>', $article, 1);
+
             // Add (HD) after the last paragraph
-            //$article = preg_replace('/<\/p>$/', ' <strong>(HD)</strong></p>', $article);
-        
+            $article = preg_replace('/<\/p>$/', ' <strong>***</strong></p>', $article);
+
+            // Tambahkan satu baris kosong setelah setiap paragraf yang berakhir dengan titik, kecuali angka dengan titik
+            $article = preg_replace('/(?<=[^0-9])\.\s/', ".<br/><br/>", $article);
+
+            // Tambahkan dua baris kosong setiap tiga paragraf
+            $article = preg_replace_callback('/<\/p>/', function ($matches) {
+                static $count = 0;
+                $count++;
+                if ($count % 1 == 0) {
+                    return '</p><br/><br/>';
+                } else {
+                    return $matches[0];
+                }
+            }, $article);
+
             echo '<h2>Ouput Artikel : </h2>';
             echo '<div id="parsed-article">' . nl2br($article) . '</div>';
         }
         ?>
+
+
 
         <button id="copyButton" class="btn btn-primary" onclick="copyToClipboard()">Salin Artikel Hanya Text</button>
         <button id="copyAsHyperlinkButton" class="btn btn-info" onclick="copyAsHyperlink()">Salin Artikel dengan
