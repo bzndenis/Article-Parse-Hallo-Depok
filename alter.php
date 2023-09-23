@@ -110,11 +110,12 @@
 
             // Add (HD) after the last paragraph
             $article = preg_replace('/<\/p>$/', '<br><br> Tuliskan Judul Menarik dan kreatif yang membuat orang klik judul tersebut, buat judul agar banyak di cari.
-            buat SEO meta-description singkat  18 kata dan tuliskan 7 keyword shortail 1 kata.
-            tuliskan artikel SEO Friendly dalam bahasa indonesia.
+            buat SEO meta-description singkat  18 kata.
+            tuliskan sebanyak 5 keyword shortail dalam 1 kata.
+            tuliskan artikel SEO Friendly dalam bahasa [TARGETLANGUAGE].
             tulis dari acuan diatas minimal 1500 kata dan maksimal 2500 kata.
             masukan keyword ke judul, deskripsi.
-            tulis artikel yang 100% unik, kreatif, dan bergaya jurnalis.</p>', $article);
+            tulis artikel yang 100% unik agar tidak plagiat, kreatif, dan bergaya jurnalis.</p>', $article);
 
             echo '<h2>Ouput ChatGPT Command : </h2>';
             echo '<p id="success-message" style="color: green; font-weight: bold;">
