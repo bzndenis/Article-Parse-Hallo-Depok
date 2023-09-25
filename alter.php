@@ -42,7 +42,7 @@
         }
     </style>
     <script
-        src="https://cdn.tiny.cloud/1/vmzgpqebnq23hnpw7i0ubynejm8aur0uhmp7benl2c6k6ln6/tinymce/5/tinymce.min.js"></script>
+        src="https://denis.skripsijoss.my.id/parser/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: '#article',
