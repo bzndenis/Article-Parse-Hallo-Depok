@@ -99,9 +99,9 @@
             // Hapus karakter '*' dalam artikel
             $article = str_replace('*', '', $article);
             $article = str_replace('#', '', $article);
-            $article = str_replace('Kamu', 'Kawan serupa', $article);
-            $article = str_replace('Anda', 'Kawan serupa', $article);
-            $article = str_replace('Kalian', 'Kawan serupa', $article);
+            $article = str_replace('Kamu', 'Sobat Hopa', $article);
+            $article = str_replace('Anda', 'Sobat Hopa', $article);
+            $article = str_replace('Kalian', 'Sobat Hopa', $article);
             $article = str_replace('<br/><br/>', '<br/>', $article);
         
             // Tidy the paragraphs
@@ -109,7 +109,7 @@
             $article = preg_replace('/\s{2,}/', ' ', $article);
 
             // Add "HALLO.DEPOK.ID" before the first paragraph
-            $article = preg_replace('/<p>/', '<p><strong>hobiserupa.my.id - </strong>', $article, 1);
+            $article = preg_replace('/<p>/', '<p><strong>HOBISERUPA.MY.ID - </strong>', $article, 1);
 
             // Add (HD) after the last paragraph
             $article = preg_replace('/<\/p>$/', ' <strong>***</strong></p>', $article);
