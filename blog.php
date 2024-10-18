@@ -41,7 +41,7 @@
             }
         }
     </style>
-    <script src="https://denis.skripsijoss.my.id/parser/tinymce/tinymce.min.js"></script>
+    <script src="https://parser.koys.my.id/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: 'textarea',

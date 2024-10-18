@@ -41,7 +41,7 @@
             }
         }
     </style>
-    <script src="https://denis.skripsijoss.my.id/parser/tinymce/tinymce.min.js"></script>
+        <script src="https://parser.koys.my.id/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: 'textarea',
@@ -96,17 +96,17 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $article = $_POST['article'];
 
-            // Hapus karakter '*' dalam artikel
-            $article = str_replace('*', '', $article);
-            $article = str_replace('#', '', $article);
-            //$article = str_replace('Kamu', 'Bestie hallo', $article);
-            //$article = str_replace('Anda', 'Bestie hallo', $article);
-            //$article = str_replace('Kalian', 'Bestie hallo', $article);
-            //$article = str_replace('<br/><br/>', '<br/>', $article);
-        
+            // Hapus karakter '*' dan '#' dalam artikel
+            $article = str_replace(['*', '#'], '', $article);
+
             // Tidy the paragraphs
-            $article = preg_replace('/<p>\s*(.*?)\s*<\/p>/', '<p>$1</p>', $article, -1);
-            $article = preg_replace('/\s{2,}/', ' ', $article);
+            $article = preg_replace([
+                '/<p>\s*(.*?)\s*<\/p>/', // Menghapus spasi di dalam tag <p>
+                '/\s{2,}/'               // Mengganti spasi ganda dengan satu spasi
+            ], [
+                '<p>$1</p>',
+                ' '
+            ], $article);
 
             // Add "HALLO.DEPOK.ID" before the first paragraph
             $article = preg_replace('/<p>/', '<p><strong>HALLO.DEPOK.ID - </strong>', $article, 1);
@@ -114,8 +114,8 @@
             // Add (HD) after the last paragraph
             $article = preg_replace('/<\/p>$/', ' <strong>***</strong></p>', $article);
 
-            // Tambahkan satu baris kosong setelah setiap paragraf yang berakhir dengan titik, kecuali angka dengan titik
-            $article = preg_replace('/(?<=[^0-9])\.\s/', ".<br/><br/>", $article);
+            // Tambahkan satu baris kosong setelah setiap paragraf yang berakhir dengan titik
+            $article = preg_replace('/(?<=[^0-9a-zA-Z])\.\s/', ".<br/><br/>", $article);
 
             echo '<h2>Ouput Artikel : </h2>';
             echo '<div id="parsed-article">' . nl2br($article) . '</div>';
@@ -136,7 +136,10 @@
                 href="http://koys.my.id" target="_blank">Bekoy</a>
         </p>
     </div>
-
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
